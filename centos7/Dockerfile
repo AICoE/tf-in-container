@@ -45,15 +45,15 @@ ENV TEST_CMD="import tensorflow as tf ; a = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0
 	sess = tf.Session(config=tf.ConfigProto(log_device_placement=True)) ;print(sess.run(c))"
 
 ARG TF_URL=https://github.com/AICoE/tensorflow-wheels/releases/download/tf-r1.14-cpu-2019-08-01_205450/tensorflow-1.14.1-cp36-cp36m-linux_x86_64.whl
-ARG TF_SERVING_URL=https://github.com/AICoE/tensorflow-wheels/releases/download/tensorflow_serving_api-r1.14-cpu-2019-08-13_152521/tensorflow_serving_api-1.14.0-py2.py3-none-any.whl
-ARG TF_MODEL_SERVER_RPM=https://github.com/AICoE/tensorflow-wheels/releases/download/tensorflow_serving_api-r1.14-cpu-2019-08-13_152521/tf-model-serving-1.14-1.0-1.x86_64.rpm
+ARG TF_SERVING_URL=https://github.com/AICoE/tensorflow-wheels/releases/download/tensorflow_serving_api-r1.14-cpu-2019-08-14_132212/tensorflow_serving_api-1.14.0-py2.py3-none-any.whl
+ARG TF_MODEL_SERVER_RPM=https://github.com/AICoE/tensorflow-wheels/releases/download/tensorflow_serving_api-r1.14-cpu-2019-08-14_132212/tensorflow-model-serving-r1.14-1.0-1.x86_64.rpm
 
 RUN INSTALL_PKGS="wget vim unzip which passwd shadow-utils krb5-libs vte-profile findutils file procps gcc scl-utils rh-python36 rh-python36-python-pip rh-python36-python-devel" && \
     yum install -y centos-release-scl-rh && \
     yum -y --setopt=tsflags=nodocs install $INSTALL_PKGS && \
     curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py" && \
 	  wget $TF_URL $TF_SERVING_URL $TF_MODEL_SERVER_RPM && \
-    yum install -y tf-model-*
+    yum install -y tensorflow-model-*
 
 RUN source scl_source enable rh-python36 && \
     python -V && \
